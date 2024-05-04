@@ -1,9 +1,19 @@
 import { Router, Request, Response, response } from 'express';
 import { body, validationResult } from 'express-validator';
 import { Book } from '../models/book';
+import testBooks from '../tests/testBooks';
 
 const router = Router();
+
+
+
 let books: Book[] = [];
+
+// Hacky way to generate test data for unit tests
+// I populate the server with some data so you can actually test if the API works
+// if (process.env.NODE_ENV === 'test') {
+    books.push(...testBooks);
+// }
 
 const bookValidationRules = [
     body('title').notEmpty().withMessage('Title is required'),
@@ -60,12 +70,23 @@ router.put('/:id', bookValidationRules, (req: Request, res: Response) => {
 });
   
 
-// retrieve all tasks
+// retrieve all books
 router.get('/', (req: Request, res: Response) => {
-    res.json(books);
+    // TODO: Implement multiple-filtering, where both say a genre and an author could be specified.
+    // Beyond the scope of the assignment though, so not doing now
+    const genre = req.query.genre?.toString();
+
+    if (!genre){
+        res.json(books);
+    }
+    else {
+        res.json(getBooks(genre))
+    }
+
+    
 })
 
-// read a single task by ID
+// read a single book by ID
 router.get('/:id', (req: Request, res: Response) => {
     const book = books.find((t) => t.id === parseInt(req.params.id));
 
@@ -76,7 +97,7 @@ router.get('/:id', (req: Request, res: Response) => {
     }
 });
 
-//delete a task by ID:
+//delete a book by ID:
 router.delete('/:id', (req: Request, res: Response) => {
     const index = books.findIndex((t) => t.id === parseInt(req.params.id));
   
@@ -89,7 +110,7 @@ router.delete('/:id', (req: Request, res: Response) => {
   });
 
 export function getBooks(genre: string): Book[] {
-    return books.filter((book) => book.genre === genre);
+    return books.filter(book => book.genre === genre);
 }
 
 

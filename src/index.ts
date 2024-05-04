@@ -12,7 +12,8 @@ app.use('/books', bookRoutes); //
 
 // Define a route:
 app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, TS EXPRESS!');
+    res.send("If this were a bookstore, you would now be seeing the best-looking UI you would ever have the privilege of experiencing. Don't ask me to\
+    make it though, I don't have UI or UX experience. :') ");
 })
 
 // Error handling middleware:
@@ -25,3 +26,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
+
+export default app;

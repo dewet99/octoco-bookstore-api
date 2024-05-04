@@ -1,4 +1,4 @@
-# Simple Crypto Web App
+# Simple Bookstore RESTful API
 ## Description
 A simple API to perform CRUD operations for a fictional bookstore using Typescript and Express.
 
@@ -19,7 +19,7 @@ This project was made using `npm 10.7.0` and `npx 10.7.0`.
     ```bash
     npm start
     ```
-4. The web app should open automatically inside your default browser.
+4. It will be hosted on localhost, port 3000. You can then start doing CRUD requests, or navigate to the displayed link and the endpoints as described in the assignment sheet.
 
 ## Usage
 1. The server is populated with some data, defined in `tests/testBooks.ts`, just so you don't need to manually add data for testing API functionality.

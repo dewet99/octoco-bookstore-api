@@ -18,7 +18,7 @@ router.get('/', (req: Request, res: Response) => {
     // Filter books by the specified genre:
     const genreBooks = getBooks(genre);
 
-    if (!genreBooks){
+    if (genreBooks.length === 0){
         return res.status(404).json({error: "No books of that genre"});
     }
 
